@@ -23,5 +23,9 @@ function keydownFunc(event) {
   if (input == char) {
     console.log("OK");
     charCount++;
+    // 正しく入力できた文字を赤色にする
+    var redChar = question.slice(0, charCount);
+    var blackChar = question.slice(charCount, question.length);
+    document.getElementById("output").innerHTML = '<span style="color:red">' + redChar + '</span>' + blackChar;
   }
 }
