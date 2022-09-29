@@ -1,5 +1,9 @@
+// すべてのお題
+var questions = [
+  "ringo", "sakuranbo", "momo", "remon", "budou", "mikan", "kaki", "banana", "masukatto", "painappuru"
+];
 // 画面に表示しているお題
-var question = "ringo";
+var question = questions[0];
 // カウントしている文字数
 var charCount = 0;
 
