@@ -2,6 +2,8 @@
 var questions = [
   "ringo", "sakuranbo", "momo", "remon", "budou", "mikan", "kaki", "banana", "masukatto", "painappuru"
 ];
+// 完了したお題の数
+var questionCount = 0;
 // 画面に表示しているお題
 var question = questions[0];
 // カウントしている文字数
@@ -35,5 +37,18 @@ function keydownFunc(event) {
   // お題の文字がすべて入力できたかをチェックする
   if (charCount == question.length) {
     console.log("COMPLETED");
+    questionCount++;
+  } else {
+    // お題がまだ途中の場合は処理を中断する
+    return;
+  }
+  // すべてのお題が完了したかをチェックする
+  if (questionCount == questions.length) {
+    console.log("FINISH!");
+  } else {
+    // 最後のお題ではない場合、カウント中の文字数を初期化してと次の問題を表示する
+    charCount = 0;
+    question = questions[questionCount];
+    document.getElementById("output").innerHTML = question;
   }
 }
