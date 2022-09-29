@@ -5,3 +5,9 @@ function showQuestion() {
   document.getElementById("output").innerHTML = question;
 }
 showQuestion();
+
+addEventListener("keydown", keydownFunc);
+// 入力したキーを判定する
+function keydownFunc(event) {
+  console.log(event.key);
+}
