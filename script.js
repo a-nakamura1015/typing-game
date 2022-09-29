@@ -28,4 +28,8 @@ function keydownFunc(event) {
     var blackChar = question.slice(charCount, question.length);
     document.getElementById("output").innerHTML = '<span style="color:red">' + redChar + '</span>' + blackChar;
   }
+  // お題の文字がすべて入力できたかをチェックする
+  if (charCount == question.length) {
+    console.log("COMPLETED");
+  }
 }
