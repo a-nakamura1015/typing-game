@@ -26,6 +26,8 @@ function setUp() {
 // ゲームを開始する処理
 function start() {
   isStarted = true;
+  timeCount = 60;
+  timerId = setInterval(countDown, 1000);
   sortByRandom();
   showQuestion(0);
   removeEventListener("keydown", start);
@@ -34,33 +36,25 @@ function start() {
 
 // ゲームを終了する処理
 function finish() {
+  // 画面に登録しているイベントやタイマーを削除する
   removeEventListener("keydown", keydownFunc);
+  clearInterval(timerId);
+  // ゲーム終了画面を表示する
+  document.getElementById("timer").innerHTML = "";
   document.getElementById("img").innerHTML = "";
   document.getElementById("output").innerHTML = "FINISH!";
 }
 
 // カウントダウンを設定する
 function setCountDown() {
+  showCountDown();
   timerId = setInterval(countDown, 1000);
   // クリックしてもカウントダウンが起きないようにする
   removeEventListener("keydown", setCountDown);
 }
 
 // 画面上にカウントダウンを表示する
-function countDown() {
-  if (timeCount == 0) {
-    // カウントダウンが完了したときの処理
-    clearInterval(timerId);
-    if (isStarted == false) {
-      timeCount = 60;
-      timerId = setInterval(countDown, 1000);
-      start();
-    }
-  } else {
-    // カウントダウンが途中のときの処理
-    timeCount--;
-  }
-  // カウントダウンを表示する
+function showCountDown() {
   var timeOutputTargetId = "";
   if (isStarted == true) {
     // ゲームが開始しているときの処理
@@ -70,6 +64,27 @@ function countDown() {
     timeOutputTargetId = "output";
   }
   document.getElementById(timeOutputTargetId).innerHTML = timeCount;
+}
+
+// カウントダウンを行う
+function countDown() {
+  if (timeCount == 0) {
+    // カウントダウンが完了したときの処理
+    clearInterval(timerId);
+    if (isStarted == false) {
+      // ゲーム開始
+      start();
+    } else {
+      // ゲーム終了
+      finish();
+      return;
+    }
+  } else {
+    // カウントダウンが途中のときの処理
+    timeCount--;
+  }
+  // カウントダウンを表示する
+  showCountDown();
 }
 
 // 問題をランダムに並べ替える
