@@ -26,6 +26,7 @@ function sortByRandom() {
 function showQuestion(questionCount) {
   // 画面上に問題を表示する
   question = questions[questionCount];
+  document.getElementById("img").innerHTML = '<img src="./img/' + question + '.png"></img>';
   document.getElementById("output").innerHTML = question;
 }
 
