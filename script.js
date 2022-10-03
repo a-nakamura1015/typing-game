@@ -11,7 +11,18 @@ var charCount = 0;
 
 // お題を表示する
 function showQuestion() {
+  // 問題をランダムに並べ替える
+  for (var i = questions.length; i > 1; i--) {
+    // ランダムで取り出す要素番号を求める
+    var randomIndex = Math.floor(Math.random() * i);
+    // ランダムで求めた要素番号で既存配列から値を取り出す
+    var targetQuestion = questions[randomIndex];
+    // ランダムで取り出した要素と要素番号の降順で取り出した要素を入れ替える
+    questions[randomIndex] = questions[i - 1];
+    questions[i - 1] = targetQuestion;
+  }
   // 画面上に問題を表示する
+  question = questions[0];
   document.getElementById("output").innerHTML = question;
 }
 showQuestion();
