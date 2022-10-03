@@ -26,3 +26,21 @@ img {
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
+#result {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  font-size: 50px;
+  font-weight: bold;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+#result-detail {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  font-size: 30px;
+  font-weight: bold;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

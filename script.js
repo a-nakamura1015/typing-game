@@ -48,14 +48,14 @@ function finish() {
   if (typingAllCount !== 0) {
     correctAnswerRate = Math.round(typingCorrectCount / typingAllCount * 100);
   }
-  console.log('正答率：' + correctAnswerRate + '%');
   // スコアを求める
   var score = typingAllCount * 10 * (correctAnswerRate / 100);
-  console.log('スコア：' + score + 'Point');
   // ゲーム終了画面を表示する
   document.getElementById("timer").innerHTML = "";
   document.getElementById("img").innerHTML = "";
   document.getElementById("output").innerHTML = "FINISH!";
+  document.getElementById("result").innerHTML = score + " Point";
+  document.getElementById("result-detail").innerHTML = "入力した回数：" + typingAllCount + "回 正しく入力した回数：" + typingCorrectCount + "回 正答率：" + correctAnswerRate + "%";
 }
 
 // カウントダウンを設定する
