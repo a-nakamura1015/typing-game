@@ -57,6 +57,7 @@ function keydownFunc(event) {
   // すべてのお題が完了したかをチェックする
   if (questionCount == questions.length) {
     console.log("FINISH!");
+    removeEventListener("keydown", keydownFunc);
   } else {
     // 最後のお題ではない場合、カウント中の文字数を初期化してと次の問題を表示する
     charCount = 0;
