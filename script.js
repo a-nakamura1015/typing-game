@@ -14,6 +14,10 @@ var timeCount = 0;
 var timerId = "";
 // ゲームが開始しているかを判定するフラグ
 var isStarted = false;
+// 入力した文字数
+var typingAllCount = 0;
+// 正しく入力した文字数
+var typingCorrectCount = 0;
 
 // 初期表示時にゲームのセットアップを行う
 function setUp() {
@@ -110,6 +114,7 @@ function showQuestion(questionCount) {
 
 // 入力したキーを判定する
 function keydownFunc(event) {
+  typingAllCount++;
   console.log(event.key);
   // 入力した文字を取得する
   var input = event.key;
@@ -120,6 +125,7 @@ function keydownFunc(event) {
   if (input == char) {
     console.log("OK");
     charCount++;
+    typingCorrectCount++;
     // 正しく入力できた文字を赤色にする
     var redChar = question.slice(0, charCount);
     var blackChar = question.slice(charCount, question.length);
@@ -127,7 +133,7 @@ function keydownFunc(event) {
   }
   // お題の文字がすべて入力できたかをチェックする
   if (charCount == question.length) {
-    console.log("COMPLETED");
+    console.log("COMPLETED:" + " typingAllCount:" + typingAllCount +  "  typingCorrectCount:" +  typingCorrectCount);
     questionCount++;
   } else {
     // お題がまだ途中の場合は処理を中断する
