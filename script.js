@@ -23,6 +23,13 @@ function start() {
   addEventListener("keydown", keydownFunc);
 }
 
+// ゲームを終了する処理
+function finish() {
+  removeEventListener("keydown", keydownFunc);
+  document.getElementById("img").innerHTML = "";
+  document.getElementById("output").innerHTML = "FINISH!";
+}
+
 // 問題をランダムに並べ替える
 function sortByRandom() {
   for (var i = questions.length; i > 1; i--) {
@@ -71,8 +78,7 @@ function keydownFunc(event) {
   }
   // すべてのお題が完了したかをチェックする
   if (questionCount == questions.length) {
-    console.log("FINISH!");
-    removeEventListener("keydown", keydownFunc);
+    finish();
   } else {
     // 最後のお題ではない場合、カウント中の文字数を初期化してと次の問題を表示する
     charCount = 0;
