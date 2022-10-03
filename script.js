@@ -9,9 +9,8 @@ var question = questions[0];
 // カウントしている文字数
 var charCount = 0;
 
-// お題を表示する
-function showQuestion() {
-  // 問題をランダムに並べ替える
+// 問題をランダムに並べ替える
+function sortByRandom() {
   for (var i = questions.length; i > 1; i--) {
     // ランダムで取り出す要素番号を求める
     var randomIndex = Math.floor(Math.random() * i);
@@ -21,8 +20,12 @@ function showQuestion() {
     questions[randomIndex] = questions[i - 1];
     questions[i - 1] = targetQuestion;
   }
+}
+
+// お題を表示する
+function showQuestion(questionCount) {
   // 画面上に問題を表示する
-  question = questions[0];
+  question = questions[questionCount];
   document.getElementById("output").innerHTML = question;
 }
 
@@ -57,11 +60,11 @@ function keydownFunc(event) {
   } else {
     // 最後のお題ではない場合、カウント中の文字数を初期化してと次の問題を表示する
     charCount = 0;
-    question = questions[questionCount];
-    document.getElementById("output").innerHTML = question;
+    showQuestion(questionCount);
   }
 }
 
 // 初期表示の処理
-showQuestion();
+sortByRandom();
+showQuestion(0);
 addEventListener("keydown", keydownFunc);
