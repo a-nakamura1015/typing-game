@@ -8,11 +8,17 @@ var questionCount = 0;
 var question = questions[0];
 // カウントしている文字数
 var charCount = 0;
+// カウントしている時間
+var timeCount = 0;
+// 設定しているタイマーのID
+var timerId = "";
 
 // 初期表示時にゲームのセットアップを行う
 function setUp() {
   document.getElementById("output").innerHTML = "ARE YOU READY?";
-  addEventListener("keydown", start);
+  // キーをクリックしてから3秒間のカウントダウンが表示する
+  timeCount = 3;
+  addEventListener("keydown", setCountDown);
 }
 
 // ゲームを開始する処理
@@ -28,6 +34,26 @@ function finish() {
   removeEventListener("keydown", keydownFunc);
   document.getElementById("img").innerHTML = "";
   document.getElementById("output").innerHTML = "FINISH!";
+}
+
+// カウントダウンを設定する
+function setCountDown() {
+  timerId = setInterval(countDown, 1000);
+  // クリックしてもカウントダウンが起きないようにする
+  removeEventListener("keydown", setCountDown);
+}
+
+// 画面上にカウントダウンを表示する
+function countDown() {
+  if (timeCount == 0) {
+    // カウントダウンが完了したときの処理
+    clearInterval(timerId);
+    start();
+  } else {
+    // カウントダウンが途中のときの処理
+    document.getElementById("output").innerHTML = timeCount;
+    timeCount--;
+  }
 }
 
 // 問題をランダムに並べ替える
