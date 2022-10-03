@@ -9,6 +9,20 @@ var question = questions[0];
 // カウントしている文字数
 var charCount = 0;
 
+// 初期表示時にゲームのセットアップを行う
+function setUp() {
+  document.getElementById('output').innerHTML = "ARE YOU READY?";
+  addEventListener("keydown", start);
+}
+
+// ゲームを開始する処理
+function start() {
+  sortByRandom();
+  showQuestion(0);
+  removeEventListener("keydown", start);
+  addEventListener("keydown", keydownFunc);
+}
+
 // 問題をランダムに並べ替える
 function sortByRandom() {
   for (var i = questions.length; i > 1; i--) {
@@ -67,6 +81,4 @@ function keydownFunc(event) {
 }
 
 // 初期表示の処理
-sortByRandom();
-showQuestion(0);
-addEventListener("keydown", keydownFunc);
+setUp();
