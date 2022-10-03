@@ -11,7 +11,7 @@ var charCount = 0;
 
 // 初期表示時にゲームのセットアップを行う
 function setUp() {
-  document.getElementById('output').innerHTML = "ARE YOU READY?";
+  document.getElementById("output").innerHTML = "ARE YOU READY?";
   addEventListener("keydown", start);
 }
 
