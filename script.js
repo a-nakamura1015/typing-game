@@ -25,9 +25,7 @@ function showQuestion() {
   question = questions[0];
   document.getElementById("output").innerHTML = question;
 }
-showQuestion();
 
-addEventListener("keydown", keydownFunc);
 // 入力したキーを判定する
 function keydownFunc(event) {
   console.log(event.key);
@@ -63,3 +61,7 @@ function keydownFunc(event) {
     document.getElementById("output").innerHTML = question;
   }
 }
+
+// 初期表示の処理
+showQuestion();
+addEventListener("keydown", keydownFunc);
