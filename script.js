@@ -12,6 +12,8 @@ var charCount = 0;
 var timeCount = 0;
 // 設定しているタイマーのID
 var timerId = "";
+// ゲームが開始しているかを判定するフラグ
+var isStarted = false;
 
 // 初期表示時にゲームのセットアップを行う
 function setUp() {
@@ -23,6 +25,7 @@ function setUp() {
 
 // ゲームを開始する処理
 function start() {
+  isStarted = true;
   sortByRandom();
   showQuestion(0);
   removeEventListener("keydown", start);
@@ -48,12 +51,25 @@ function countDown() {
   if (timeCount == 0) {
     // カウントダウンが完了したときの処理
     clearInterval(timerId);
-    start();
+    if (isStarted == false) {
+      timeCount = 60;
+      timerId = setInterval(countDown, 1000);
+      start();
+    }
   } else {
     // カウントダウンが途中のときの処理
-    document.getElementById("output").innerHTML = timeCount;
     timeCount--;
   }
+  // カウントダウンを表示する
+  var timeOutputTargetId = "";
+  if (isStarted == true) {
+    // ゲームが開始しているときの処理
+    timeOutputTargetId = "timer";
+  } else {
+    // ゲームがまだ開始していないときの処理
+    timeOutputTargetId = "output";
+  }
+  document.getElementById(timeOutputTargetId).innerHTML = timeCount;
 }
 
 // 問題をランダムに並べ替える
