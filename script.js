@@ -48,7 +48,10 @@ function finish() {
   if (typingAllCount !== 0) {
     correctAnswerRate = Math.round(typingCorrectCount / typingAllCount * 100);
   }
-  console.log('正答率：' +  correctAnswerRate + '%');
+  console.log('正答率：' + correctAnswerRate + '%');
+  // スコアを求める
+  var score = typingAllCount * 10 * (correctAnswerRate / 100);
+  console.log('スコア：' + score + 'Point');
   // ゲーム終了画面を表示する
   document.getElementById("timer").innerHTML = "";
   document.getElementById("img").innerHTML = "";
