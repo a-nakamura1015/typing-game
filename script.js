@@ -43,6 +43,12 @@ function finish() {
   // 画面に登録しているイベントやタイマーを削除する
   removeEventListener("keydown", keydownFunc);
   clearInterval(timerId);
+  // 正答率を求める
+  var correctAnswerRate = 0;
+  if (typingAllCount !== 0) {
+    correctAnswerRate = Math.round(typingCorrectCount / typingAllCount * 100);
+  }
+  console.log('正答率：' +  correctAnswerRate + '%');
   // ゲーム終了画面を表示する
   document.getElementById("timer").innerHTML = "";
   document.getElementById("img").innerHTML = "";
