@@ -18,6 +18,8 @@ var isStarted = false;
 var typingAllCount = 0;
 // 正しく入力した文字数
 var typingCorrectCount = 0;
+// 残機の数
+var lifeCount = 5;
 
 // 初期表示時にゲームのセットアップを行う
 function setUp() {
@@ -34,6 +36,7 @@ function start() {
   timerId = setInterval(countDown, 1000);
   sortByRandom();
   showQuestion(0);
+  showLife();
   removeEventListener("keydown", start);
   addEventListener("keydown", keydownFunc);
 }
@@ -56,6 +59,21 @@ function finish() {
   document.getElementById("output").innerHTML = "FINISH!";
   document.getElementById("result").innerHTML = score + " Point";
   document.getElementById("result-detail").innerHTML = "入力した回数：" + typingAllCount + "回 正しく入力した回数：" + typingCorrectCount + "回 正答率：" + correctAnswerRate + "%";
+}
+
+// ゲームオーバーの処理
+function gameover() {
+  // 画面に登録しているイベントやタイマーを削除する
+  removeEventListener("keydown", keydownFunc);
+  clearInterval(timerId);
+  // ゲームオーバー画面を表示する
+  document.getElementById("timer").innerHTML = "";
+  document.getElementById("img").innerHTML = "";
+  document.getElementById("output").innerHTML = "GAME OVER";
+  // スタイルを変更する
+  var body = document.querySelector("body");
+  body.style.color = "white";
+  body.style.backgroundColor = "black";
 }
 
 // カウントダウンを設定する
@@ -121,6 +139,15 @@ function showQuestion(questionCount) {
   document.getElementById("output").innerHTML = question;
 }
 
+// 残機を表示する
+function showLife() {
+  var life = "";
+  for (var i = 0; i < lifeCount; i++) {
+    life += "❤︎";
+  }
+  document.getElementById("result").innerHTML = life;
+}
+
 // 入力したキーを判定する
 function keydownFunc(event) {
   typingAllCount++;
@@ -139,6 +166,15 @@ function keydownFunc(event) {
     var redChar = question.slice(0, charCount);
     var blackChar = question.slice(charCount, question.length);
     document.getElementById("output").innerHTML = '<span style="color:red">' + redChar + '</span>' + blackChar;
+  } else {
+    // 入力を間違えた場合
+    lifeCount--;
+    showLife();
+  }
+  // 残機が残っているかをチェックする
+  if (lifeCount < 1) {
+    gameover();
+    return;
   }
   // お題の文字がすべて入力できたかをチェックする
   if (charCount == question.length) {
